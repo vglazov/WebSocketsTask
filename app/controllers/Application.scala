@@ -20,10 +20,6 @@ class Application @Inject() (implicit system: ActorSystem, materializer: Materia
   private val tablesActor: ActorRef = system.actorOf(TablesActor.props(InMemoryTablesDao, eventBus))
 
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
-  }
-
   def webSocket = WebSocket.accept[String, String] { request =>
     ActorFlow.actorRef(out => WebSocketActor.props(out, authenticationActor, pingPongActor, tablesActor))
   }
