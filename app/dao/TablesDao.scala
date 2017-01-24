@@ -29,7 +29,7 @@ object TablesDao {
       val orderingIndex = afterId match {
         case None => tablesOrdering.size
         case Some(-1) => 0
-        case Some(thatId) => tablesOrdering.indexOf(thatId)
+        case Some(thatId) => tablesOrdering.indexOf(thatId) + 1
       }
       if(orderingIndex == -1) throw new IllegalArgumentException(s"Cannot find id in sequence: $afterId")
 
